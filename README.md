@@ -49,11 +49,10 @@ python3 -m http.server 8000
 
 ## Pendiente antes de publicar
 
-- [ ] **Datos de contacto** en `assets/js/config.js` (WhatsApp y/o email).
-- [ ] **Datos legales** en `aviso-legal.html` y `privacidad.html` (razón social, NIF, dirección,
-      email y, si procede, número del Registro de Agentes Inmobiliarios de las Illes Balears).
-- [ ] **Foto de Gricel**: guárdala como `assets/img/gricel.jpg` (vertical, 4:5). Mientras no exista,
-      se muestra un monograma.
+- [x] **Datos de contacto** en `assets/js/config.js` (WhatsApp y email).
+- [ ] **Datos legales** en `aviso-legal.html` y `privacidad.html` (razón social, NIF, dirección
+      y, si procede, número del Registro de Agentes Inmobiliarios de las Illes Balears).
+- [x] **Foto de Gricel** en `assets/img/gricel.jpg` (vertical, 4:5).
 - [ ] **Logotipo en alta resolución**: el símbolo actual está extraído de una publicación de Instagram
       (`assets/img/alma-mark.png` y `alma-mark-light.png`). Si tienes el SVG o PNG original, sustitúyelos.
 - [ ] **Dominio**: cuando lo tengas, usa la URL absoluta en `og:image` de `index.html` para que

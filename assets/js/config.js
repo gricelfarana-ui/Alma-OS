@@ -8,7 +8,7 @@
  *              (en Netlify el formulario se envía solo, vía Netlify Forms).
  */
 window.ALMA_CONTACT = {
-  whatsapp: "",
-  email: "",
+  whatsapp: "34605669598",
+  email: "conalmainmo@gmail.com",
   instagram: "almainmo"
 };

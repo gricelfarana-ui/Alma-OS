@@ -611,3 +611,13 @@ button { font: inherit; cursor: pointer; }
 /* Ajustes finos */
 .island-card h3, .pillar h3, .never-list h3 { line-height: 1.2; }
 .field label.chip { display: inline-block; margin: 0; font-size: inherit; font-weight: 400; letter-spacing: normal; text-transform: none; }
+
+/* Contacto directo */
+.contact-direct { list-style: none; display: grid; gap: 14px; margin-top: 8px; }
+.contact-direct li { display: grid; gap: 2px; }
+.contact-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-2); }
+.contact-direct a { font-family: var(--serif); font-size: 24px; color: var(--cream); text-decoration: none; user-select: all; }
+.contact-direct a:hover { color: var(--gold-soft); }
+.footer-contact { margin-top: 18px; line-height: 1.9; }
+.footer-contact a { color: rgba(247, 242, 232, 0.85); text-decoration: none; }
+.footer-contact a:hover { color: var(--gold-2); }
