@@ -100,10 +100,10 @@
   var dial = document.querySelector("[data-dial]");
   if (dial) {
     var positions = [
-      { label: "Sobreprecio", text: "Claramente por encima del rango competitivo. Menos interés, pocas visitas y, casi siempre, bajadas de precio obligadas más adelante.", demand: 12, speed: 10, nego: 18 },
-      { label: "Precio alto", text: "Existe cierta conexión con el mercado, pero limita la demanda y alarga sensiblemente el tiempo necesario para vender.", demand: 38, speed: 32, nego: 42 },
-      { label: "Precio estratégico", text: "El rango de mejor equilibrio entre valor, demanda, competencia y capacidad de negociación. Es donde solemos recomendar salir.", demand: 74, speed: 70, nego: 82 },
-      { label: "Precio oportunidad", text: "Una franja especialmente atractiva para la demanda: acelera la venta y genera competencia entre compradores.", demand: 95, speed: 94, nego: 60 }
+      { label: "Sobreprecio", text: "Atrae curiosidad, no compradores. Pocas visitas, más tiempo en el mercado y, casi siempre, bajadas de precio obligadas más adelante.", demand: 12, speed: 10, nego: 18 },
+      { label: "Precio alto", text: "Posible, con más tiempo y una estrategia clara. Conecta con el mercado, pero limita la demanda y alarga los plazos.", demand: 38, speed: 32, nego: 42 },
+      { label: "Precio estratégico", text: "La zona que recomendamos: vende y no regala valor. El mejor equilibrio entre precio, demanda, competencia y capacidad de negociación.", demand: 74, speed: 70, nego: 82 },
+      { label: "Precio oportunidad", text: "Por debajo de mercado, venta casi inmediata. Genera competencia entre compradores, a cambio de dejar margen sobre la mesa.", demand: 95, speed: 94, nego: 60 }
     ];
     var needle = dial.querySelector("[data-dial-needle]");
     var label = dial.querySelector("[data-dial-label]");
@@ -181,14 +181,26 @@
       ].filter(Boolean).join("\n");
     };
 
+    // Se llama tras un fetch fallido: fuera del clic, el navegador bloquearía window.open,
+    // así que ofrecemos un enlace para que la persona lo pulse.
+    var fallbackLink = function (href, label) {
+      status.textContent = "No hemos podido enviar el formulario desde aquí. Tu mensaje ya está preparado: ";
+      status.className = "form-status";
+      var a = document.createElement("a");
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.className = "btn btn-navy form-fallback";
+      a.textContent = label;
+      status.appendChild(a);
+    };
+
     var fallback = function (data) {
       var body = summary(data);
       if (contact.whatsapp) {
-        window.open("https://wa.me/" + contact.whatsapp + "?text=" + encodeURIComponent(body), "_blank", "noopener");
-        setStatus("Te hemos abierto WhatsApp con tu mensaje preparado.", "ok");
+        fallbackLink("https://wa.me/" + contact.whatsapp + "?text=" + encodeURIComponent(body), "Continuar por WhatsApp");
       } else if (contact.email) {
-        window.location.href = "mailto:" + contact.email + "?subject=" + encodeURIComponent("Consulta desde la web · " + data.get("nombre")) + "&body=" + encodeURIComponent(body);
-        setStatus("Te hemos abierto tu correo con el mensaje preparado.", "ok");
+        fallbackLink("mailto:" + contact.email + "?subject=" + encodeURIComponent("Consulta desde la web · " + data.get("nombre")) + "&body=" + encodeURIComponent(body), "Enviar por email");
       } else {
         setStatus("No hemos podido enviar el formulario. Escríbenos por Instagram a @" + (contact.instagram || "almainmo") + ".", "error");
       }
@@ -229,6 +241,14 @@
       });
     });
   }
+
+  /* Botones que llevan al formulario con una opción ya elegida */
+  document.querySelectorAll("[data-momento]").forEach(function (link) {
+    link.addEventListener("click", function () {
+      var radio = document.querySelector('input[name="momento"][value="' + link.dataset.momento + '"]');
+      if (radio) radio.checked = true;
+    });
+  });
 
   /* Año del pie */
   var year = document.querySelector("[data-year]");
